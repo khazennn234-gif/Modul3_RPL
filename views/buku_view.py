@@ -1,6 +1,9 @@
 import customtkinter as ctk
 from tkinter import ttk
 
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("blue")
+
 class BukuView(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -34,13 +37,15 @@ class BukuView(ctk.CTk):
         self.btn_simpan = ctk.CTkButton(self.frame_kiri, text="Simpan Data", fg_color="green")
         self.btn_simpan.pack(pady=20, padx=15, fill="x")
         
-        # Tombol Update
+        # Tombol Update / Perbarui
         self.btn_update = ctk.CTkButton(self.frame_kiri, text="Perbarui Data (Update)", fg_color="blue")
         self.btn_update.pack(pady=10, padx=15, fill="x")
+        self.btn_perbarui = self.btn_update
         
-        # Tombol Delete
+        # Tombol Delete / Hapus
         self.btn_delete = ctk.CTkButton(self.frame_kiri, text="Hapus Data (Delete)", fg_color="red")
         self.btn_delete.pack(pady=10, padx=15, fill="x")
+        self.btn_hapus = self.btn_delete
 
         # ==================================
         # FRAME KANAN: TABEL DAFTAR BUKU
@@ -49,6 +54,20 @@ class BukuView(ctk.CTk):
         self.frame_kanan.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
         ctk.CTkLabel(self.frame_kanan, text="Daftar Koleksi Buku", font=("Arial", 16, "bold")).pack(pady=15)
+
+        # Styling Treeview
+        style = ttk.Style()
+        style.theme_use("default")
+        style.configure("Treeview",
+                        background="white",
+                        foreground="black",
+                        rowheight=24,
+                        fieldbackground="white")
+        style.configure("Treeview.Heading",
+                        background="#f9f9f9",
+                        foreground="black",
+                        font=("Arial", 10, "bold"))
+        style.map("Treeview", background=[('selected', '#1f538d')], foreground=[('selected', 'white')])
 
         # Komponen Tabel (Treeview dari tkinter standar)
         kolom = ("id", "judul", "penulis", "tahun")

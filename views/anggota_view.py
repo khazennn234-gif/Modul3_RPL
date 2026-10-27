@@ -1,6 +1,9 @@
 import customtkinter as ctk
 from tkinter import ttk
 
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("blue")
+
 class AnggotaView(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -20,23 +23,39 @@ class AnggotaView(ctk.CTk):
         self.entry_nama = ctk.CTkEntry(self.frame_kiri, placeholder_text="Masukkan Nama Anggota")
         self.entry_nama.pack(pady=10, padx=15, fill="x")
 
-        self.entry_alamat = ctk.CTkEntry(self.frame_kiri, placeholder_text="Masukkan Alamat Lengkap")
+        self.entry_alamat = ctk.CTkEntry(self.frame_kiri, placeholder_text="Masukkan Alamat Anggota")
         self.entry_alamat.pack(pady=10, padx=15, fill="x")
 
         self.btn_simpan = ctk.CTkButton(self.frame_kiri, text="Simpan Data", fg_color="green")
         self.btn_simpan.pack(pady=(20, 10), padx=15, fill="x")
 
-        self.btn_update = ctk.CTkButton(self.frame_kiri, text="Perbarui Data (Update)", fg_color="blue")
-        self.btn_update.pack(pady=10, padx=15, fill="x")
+        # self.btn_update = ctk.CTkButton(self.frame_kiri, text="Perbarui Data (Update)", fg_color="blue")
+        # self.btn_update.pack(pady=10, padx=15, fill="x")
+        # self.btn_perbarui = self.btn_update
 
-        self.btn_delete = ctk.CTkButton(self.frame_kiri, text="Hapus Data (Delete)", fg_color="red")
-        self.btn_delete.pack(pady=10, padx=15, fill="x")
+        # self.btn_delete = ctk.CTkButton(self.frame_kiri, text="Hapus Data (Delete)", fg_color="red")
+        # self.btn_delete.pack(pady=10, padx=15, fill="x")
+        # self.btn_hapus = self.btn_delete
 
         # FRAME KANAN: TABEL
         self.frame_kanan = ctk.CTkFrame(self)
         self.frame_kanan.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
         ctk.CTkLabel(self.frame_kanan, text="Daftar Anggota Perpustakaan", font=("Arial", 16, "bold")).pack(pady=15)
+
+        # Styling Treeview agar sesuai dengan tampilan GUI
+        style = ttk.Style()
+        style.theme_use("default")
+        style.configure("Treeview",
+                        background="white",
+                        foreground="black",
+                        rowheight=24,
+                        fieldbackground="white")
+        style.configure("Treeview.Heading",
+                        background="#f9f9f9",
+                        foreground="black",
+                        font=("Arial", 10, "bold"))
+        style.map("Treeview", background=[('selected', '#1f538d')], foreground=[('selected', 'white')])
 
         kolom = ("id", "nama", "alamat")
         self.tabel = ttk.Treeview(self.frame_kanan, columns=kolom, show="headings", height=15)
@@ -45,9 +64,9 @@ class AnggotaView(ctk.CTk):
         self.tabel.heading("nama", text="Nama Anggota")
         self.tabel.heading("alamat", text="Alamat")
 
-        self.tabel.column("id", width=40, anchor="center")
-        self.tabel.column("nama", width=180)
-        self.tabel.column("alamat", width=200)
+        self.tabel.column("id", width=50, anchor="center")
+        self.tabel.column("nama", width=200, anchor="w")
+        self.tabel.column("alamat", width=200, anchor="w")
 
         self.tabel.pack(fill="both", expand=True, padx=15, pady=10)
 

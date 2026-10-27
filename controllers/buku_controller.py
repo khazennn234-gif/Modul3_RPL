@@ -11,8 +11,15 @@ class BukuController:
 
         # Binding (mengikat) tombol di View dengan fungsi di Controller
         self.view.btn_simpan.configure(command=self.simpan_data)
-        self.view.btn_perbarui.configure(command=self.perbarui_data)
-        self.view.btn_hapus.configure(command=self.hapus_data)
+        if hasattr(self.view, 'btn_perbarui'):
+            self.view.btn_perbarui.configure(command=self.perbarui_data)
+        elif hasattr(self.view, 'btn_update'):
+            self.view.btn_update.configure(command=self.perbarui_data)
+
+        if hasattr(self.view, 'btn_hapus'):
+            self.view.btn_hapus.configure(command=self.hapus_data)
+        elif hasattr(self.view, 'btn_delete'):
+            self.view.btn_delete.configure(command=self.hapus_data)
 
         # Event listener saat baris pada tabel diklik/dipilih
         self.view.tabel.bind("<<TreeviewSelect>>", self.pilih_data)
@@ -109,3 +116,7 @@ class BukuController:
 
     def run(self):
         self.view.mainloop()
+
+if __name__ == "__main__":
+    app = BukuController()
+    app.run()
