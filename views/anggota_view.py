@@ -29,13 +29,6 @@ class AnggotaView(ctk.CTk):
         self.btn_simpan = ctk.CTkButton(self.frame_kiri, text="Simpan Data", fg_color="green")
         self.btn_simpan.pack(pady=(20, 10), padx=15, fill="x")
 
-        # self.btn_update = ctk.CTkButton(self.frame_kiri, text="Perbarui Data (Update)", fg_color="blue")
-        # self.btn_update.pack(pady=10, padx=15, fill="x")
-        # self.btn_perbarui = self.btn_update
-
-        # self.btn_delete = ctk.CTkButton(self.frame_kiri, text="Hapus Data (Delete)", fg_color="red")
-        # self.btn_delete.pack(pady=10, padx=15, fill="x")
-        # self.btn_hapus = self.btn_delete
 
         # FRAME KANAN: TABEL
         self.frame_kanan = ctk.CTkFrame(self)

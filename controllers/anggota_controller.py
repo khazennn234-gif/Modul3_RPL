@@ -65,40 +65,7 @@ class AnggotaController:
         else:
             messagebox.showerror("Error", "Gagal menyimpan data anggota.")
 
-    def perbarui_data(self):
-        if not self.selected_id:
-            messagebox.showwarning("Peringatan", "Pilih data anggota yang akan diperbarui!")
-            return
-
-        nama = self.view.entry_nama.get()
-        alamat = self.view.entry_alamat.get()
-
-        if not nama or not alamat:
-            messagebox.showwarning("Peringatan", "Semua kolom form harus diisi!")
-            return
-
-        berhasil = self.model.update_anggota(self.selected_id, nama, alamat)
-        if berhasil:
-            messagebox.showinfo("Sukses", "Data anggota berhasil diperbarui!")
-            self.bersihkan_form()
-            self.muat_data_tabel()
-        else:
-            messagebox.showerror("Error", "Gagal memperbarui data anggota.")
-
-    def hapus_data(self):
-        if not self.selected_id:
-            messagebox.showwarning("Peringatan", "Pilih data anggota yang akan dihapus!")
-            return
-
-        if messagebox.askyesno("Konfirmasi", "Yakin ingin menghapus anggota ini?"):
-            berhasil = self.model.delete_anggota(self.selected_id)
-            if berhasil:
-                messagebox.showinfo("Sukses", "Data anggota berhasil dihapus!")
-                self.bersihkan_form()
-                self.muat_data_tabel()
-            else:
-                messagebox.showerror("Error", "Gagal menghapus data anggota.")
-
+   
     def run(self):
         self.view.mainloop()
 
