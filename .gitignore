@@ -2,4 +2,5 @@ env/
 build/
 dist/
 *.spec
-_pycache__/
+__pycache__/
+*.pyc

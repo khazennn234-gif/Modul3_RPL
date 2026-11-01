@@ -8,7 +8,7 @@ class BukuView(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Sistem Manajemen Perpustakaan")
-        self.geometry("800x450")
+        self.geometry("800x500")
 
         # Konfigurasi Grid Utama (1 Baris, 2 Kolom)
         self.grid_columnconfigure(0, weight=1) # Kolom Kiri (Form)
@@ -25,27 +25,31 @@ class BukuView(ctk.CTk):
 
         # Komponen Input
         self.entry_judul = ctk.CTkEntry(self.frame_kiri, placeholder_text="Masukkan Judul Buku")
-        self.entry_judul.pack(pady=10, padx=15, fill="x")
+        self.entry_judul.pack(pady=8, padx=15, fill="x")
 
         self.entry_penulis = ctk.CTkEntry(self.frame_kiri, placeholder_text="Masukkan Nama Penulis")
-        self.entry_penulis.pack(pady=10, padx=15, fill="x")
+        self.entry_penulis.pack(pady=8, padx=15, fill="x")
 
         self.entry_tahun = ctk.CTkEntry(self.frame_kiri, placeholder_text="Tahun Terbit (Misal: 2024)")
-        self.entry_tahun.pack(pady=10, padx=15, fill="x")
+        self.entry_tahun.pack(pady=8, padx=15, fill="x")
 
         # Tombol Aksi
         self.btn_simpan = ctk.CTkButton(self.frame_kiri, text="Simpan Data", fg_color="green")
-        self.btn_simpan.pack(pady=20, padx=15, fill="x")
+        self.btn_simpan.pack(pady=(15, 6), padx=15, fill="x")
         
         # Tombol Update / Perbarui
         self.btn_update = ctk.CTkButton(self.frame_kiri, text="Perbarui Data (Update)", fg_color="blue")
-        self.btn_update.pack(pady=10, padx=15, fill="x")
+        self.btn_update.pack(pady=6, padx=15, fill="x")
         self.btn_perbarui = self.btn_update
         
         # Tombol Delete / Hapus
         self.btn_delete = ctk.CTkButton(self.frame_kiri, text="Hapus Data (Delete)", fg_color="red")
-        self.btn_delete.pack(pady=10, padx=15, fill="x")
+        self.btn_delete.pack(pady=6, padx=15, fill="x")
         self.btn_hapus = self.btn_delete
+
+        # Tombol Logout
+        self.btn_logout = ctk.CTkButton(self.frame_kiri, text="Logout", fg_color="#555555", hover_color="#333333", command=self.logout)
+        self.btn_logout.pack(pady=(6, 15), padx=15, fill="x")
 
         # ==================================
         # FRAME KANAN: TABEL DAFTAR BUKU
@@ -86,6 +90,19 @@ class BukuView(ctk.CTk):
         self.tabel.column("tahun", width=80, anchor="center")
 
         self.tabel.pack(fill="both", expand=True, padx=15, pady=10)
+
+    def logout(self):
+        # Menutup jendela BukuView
+        self.destroy()
+        # Mengembalikan pengguna ke jendela LoginView
+        try:
+            from controllers.auth_controller import AuthController
+            app = AuthController()
+            app.run()
+        except Exception:
+            from views.login_view import LoginView
+            login = LoginView()
+            login.mainloop()
 
 # Blok eksekusi untuk menguji tampilan grafis
 if __name__ == "__main__":
